@@ -1,9 +1,12 @@
+// modules.ts
+
 import { Router } from "express";
 import BWhatsapp from "./bwhatsapp/bwa";
 import router from "./bwhatsapp/urls";
 
+// Define uma interface genérica para construtores de módulo
 interface ModuleConstructor<T> {
-  new(...args: string[]): T;
+  new(...args: never[]): T;
 }
 
 interface Modules<T> {
@@ -12,9 +15,12 @@ interface Modules<T> {
     urls: Router
   };
 }
-type ActiveModules = BWhatsapp; // ...Adicionar outras classes de módulos
+
+// Define o tipo de módulos ativos
+type ActiveModules = BWhatsapp; // Adicione outras classes conforme necessário
 
 const modules: Modules<ActiveModules> = {
-  bwhatsapp: { module: BWhatsapp, urls: router }
+  bwhatsapp: { module: BWhatsapp, urls: router },
 };
+
 export default modules;

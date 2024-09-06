@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import router from './router';
 import AppError from "./errors/AppError";
 import { logger } from "./utils/logger";
-import { startStoredSockets } from "./modules/bwhatsapp/bwa";
+import BWhatsapp from "./modules/bwhatsapp/bwa";
 import { serverConfig } from "./settings";
 
 
@@ -26,6 +26,6 @@ app.use(async (err: Error, _req: Request, res: Response, _next: NextFunction): P
 });
 app.listen(port, async () => {
   logger.info(`Server started on port: ${port}`);
-  await startStoredSockets();
+  await BWhatsapp.startStoredSessions();
 });
 

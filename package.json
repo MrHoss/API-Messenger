@@ -8,7 +8,7 @@
     "build": "npm run lint && tsc && esbuild ./dist/server.js --bundle --minify --platform=node --outfile=./dist/minified/server.min.js",
     "dev": "NODE_ENV=dev nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node --transpileOnly src/server.ts'",
     "test": "NODE_ENV=test ts-node --transpileOnly src/server.ts",
-    "start:mini": "node ./dist/minified/server.min.js",
+    "start:min": "node ./dist/minified/server.min.js",
     "start": "node ./dist/server.js"
   },
   "keywords": [
@@ -26,6 +26,7 @@
     "nodemon": "^3.1.4",
     "pino": "9.4.0",
     "pino-pretty": "^11.2.2",
+    "qrcode-terminal": "^0.12.0",
     "ts-node": "^10.9.2",
     "uuid": "^10.0.0"
   },
