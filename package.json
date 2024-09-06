@@ -1,0 +1,36 @@
+{
+  "name": "api-messenger",
+  "version": "0.1.0",
+  "description": "Api that allows send message through WhatsApp",
+  "main": "src/server.ts",
+  "scripts": {
+    "build": "tsc && esbuild ./dist/build/server.js --bundle --minify --platform=node --outfile=./dist/server.min.js",
+    "dev": "NODE_ENV=dev nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node --transpileOnly src/server.ts'",
+    "test": "NODE_ENV=test ts-node --transpileOnly src/server.ts",
+    "start": "node ./dist/server.min.js"
+  },
+  "keywords": [
+    "API",
+    "Whatsapp"
+  ],
+  "author": "Daniel Souza",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "baileys": "^6.7.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.17.21",
+    "express-async-errors": "^3.1.1",
+    "nodemon": "^3.1.4",
+    "pino": "^9.3.2",
+    "pino-pretty": "^11.2.2",
+    "ts-node": "^10.9.2",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/uuid": "^10.0.0",
+    "esbuild": "^0.23.1",
+    "typescript": "^5.5.4"
+  }
+}
