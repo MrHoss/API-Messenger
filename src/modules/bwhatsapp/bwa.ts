@@ -15,7 +15,10 @@ export interface Session extends WASocket {
 const authPath = (sessionId: string) => path.resolve(__dirname, ".auth", sessionId);
 const sessions: Session[] = [];
 const loggerBaileys = MAIN_LOGGER.child({});
-loggerBaileys.level = "silent";
+// const socketConfig = {
+
+// }
+loggerBaileys.level = "info";
 
 export function listSockets() {
     return sessions.map((s) => ({ id: s.id, qrCode: s.qrCode }));
@@ -37,7 +40,7 @@ export async function startStoredSockets() {
             await bwhatsapp.initMonitor();
         }
     } catch (err) {
-        console.error('Failed to start stored sockets', err);
+        logger.error('Failed to start stored sockets', err);
     }
 }
 
@@ -113,7 +116,7 @@ class BWhatsapp {
                     }
                 } else if (events["creds.update"]) {
                     logger.info("Auth credentials updated")
-                    saveCreds;
+                    saveCreds();
                 } else {
                     if (handler) {
                         handler(events);
@@ -124,9 +127,9 @@ class BWhatsapp {
             return;
         }
     }
-    public removeSocket(clearAuth: boolean) {
+  public removeSocket(clearAuth: boolean):void {
         try {
-            const sessionIndex = sessions.findIndex((session) => session.id === this.sessionId);
+            const sessionIndex:number = sessions.findIndex((session) => session.id === this.sessionId);
 
             if (sessionIndex !== -1) {
                 sessions[sessionIndex].logout();  // Presumindo que logout é uma operação síncrona

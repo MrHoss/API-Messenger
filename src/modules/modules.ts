@@ -2,14 +2,19 @@ import { Router } from "express";
 import BWhatsapp from "./bwhatsapp/bwa";
 import router from "./bwhatsapp/urls";
 
-interface Modules{
-    [key:string]:{
-        module: new (...args: any[]) => any, 
-        urls:Router
-    }
-};
-
-const modules:Modules = {
-    bwhatsapp:{module:BWhatsapp,urls:router}
+interface ModuleConstructor<T> {
+  new(...args: string[]): T;
 }
+
+interface Modules<T> {
+  [key: string]: {
+    module: ModuleConstructor<T>,
+    urls: Router
+  };
+}
+type ActiveModules = BWhatsapp; // ...Adicionar outras classes de módulos
+
+const modules: Modules<ActiveModules> = {
+  bwhatsapp: { module: BWhatsapp, urls: router }
+};
 export default modules;

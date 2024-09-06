@@ -4,10 +4,12 @@
   "description": "Api that allows send message through WhatsApp",
   "main": "src/server.ts",
   "scripts": {
-    "build": "tsc && esbuild ./dist/build/server.js --bundle --minify --platform=node --outfile=./dist/server.min.js",
+    "lint": "eslint 'src/**/*.{ts,js}'",
+    "build": "npm run lint && tsc && esbuild ./dist/server.js --bundle --minify --platform=node --outfile=./dist/minified/server.min.js",
     "dev": "NODE_ENV=dev nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node --transpileOnly src/server.ts'",
     "test": "NODE_ENV=test ts-node --transpileOnly src/server.ts",
-    "start": "node ./dist/server.min.js"
+    "start:mini": "node ./dist/minified/server.min.js",
+    "start": "node ./dist/server.js"
   },
   "keywords": [
     "API",
@@ -22,15 +24,19 @@
     "express": "^4.17.21",
     "express-async-errors": "^3.1.1",
     "nodemon": "^3.1.4",
-    "pino": "^9.3.2",
+    "pino": "9.4.0",
     "pino-pretty": "^11.2.2",
     "ts-node": "^10.9.2",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.9.1",
     "@types/express": "^4.17.21",
     "@types/uuid": "^10.0.0",
     "esbuild": "^0.23.1",
-    "typescript": "^5.5.4"
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.4.0"
   }
 }
